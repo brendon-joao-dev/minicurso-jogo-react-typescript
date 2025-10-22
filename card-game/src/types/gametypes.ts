@@ -40,3 +40,20 @@ cores.forEach(cor => {
     );
   }
 });
+
+export type Jogador = {
+  id: string;
+  nome: string;
+  mao: Carta[];
+  isHumano: boolean;
+}
+
+export type EstadoJogo = {
+  jogadores: Jogador[];
+  monteCompra: Carta[];
+  monteDescarte: Carta[];
+  vez: number;
+  corAtual: Cor;
+  vencedor: Jogador | null;
+  estado: 'preparacao' | 'jogando' | 'finalizado';
+}

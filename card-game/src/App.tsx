@@ -1,4 +1,4 @@
-// App.tsx - INTERATIVO
+// App.tsx - COMPLETO
 import { useReducer } from 'react';
 import { unoReducer } from './context/unoReducer';
 import { CartaUno } from './components/CartaUno';
@@ -30,9 +30,32 @@ function App() {
     }
   };
 
+  const handleComprarCarta = (jogadorIndex: number) => {
+    if (jogadorIndex === state.vez) {
+      dispatch({ type: 'COMPRAR_CARTA', jogadorIndex });
+    }
+  };
+
   const podeJogarCarta = (carta: any) => {
     return carta.cor === state.corAtual || carta.valor === cartaTopo.valor;
   };
+
+  if (state.vencedor) {
+    return (
+      <div className="tela-vitoria">
+        <div className="vitoria-container">
+          <h1>{state.vencedor.nome} Venceu!</h1>
+          <p>Parabéns!</p>
+          <button 
+            onClick={() => dispatch({ type: 'INICIAR_JOGO' })}
+            className="btn-principal"
+          >
+            Jogar Novamente
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="app-uno">
@@ -58,6 +81,14 @@ function App() {
               />
             ))}
           </div>
+          <div className="contador-cartas">
+            {state.jogadores[1]?.mao.length} cartas
+          </div>
+          {state.vez === 1 && (
+            <button onClick={() => handleComprarCarta(1)} className="btn-comprar">
+              Comprar Carta
+            </button>
+          )}
         </div>
 
         {/* Mesa Central */}
@@ -66,7 +97,7 @@ function App() {
             cartaTopo={cartaTopo}
             corAtual={state.corAtual}
             monteCompra={state.monteCompra}
-            onComprarCarta={() => {}} // Por enquanto vazio
+            onComprarCarta={() => handleComprarCarta(state.vez)}
           />
         </div>
 
@@ -83,6 +114,14 @@ function App() {
               />
             ))}
           </div>
+          <div className="contador-cartas">
+            {state.jogadores[0]?.mao.length} cartas
+          </div>
+          {state.vez === 0 && (
+            <button onClick={() => handleComprarCarta(0)} className="btn-comprar">
+              Comprar Carta
+            </button>
+          )}
         </div>
       </div>
     </div>

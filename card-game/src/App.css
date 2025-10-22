@@ -102,3 +102,64 @@ body {
   background: rgba(255,255,255,0.1); /* Cor branca com 10% de transparência */
   border-radius: 6px;         /* Cantos arredondados */
 }
+
+.app-uno {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.header-uno {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+}
+
+.info-jogo {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+/* Área do Jogo */
+.area-jogo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Jogadores */
+.jogador-area {
+  text-align: center;
+  padding: 15px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+}
+
+.jogador-area h2 {
+  margin-bottom: 15px;
+}
+
+.mao-jogador {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+/* Mesa Central */
+.mesa-central {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+}

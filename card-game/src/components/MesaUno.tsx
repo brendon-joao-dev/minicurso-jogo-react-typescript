@@ -1,8 +1,9 @@
 // components/MesaUno.tsx
 import type { Carta } from '../types/gametypes';
 import { CartaUno } from './CartaUno';
+import { motion } from "framer-motion";
 
-type MesaUnoProps = {
+interface MesaUnoProps {
   cartaTopo: Carta;
   corAtual: string;
   monteCompra: Carta[];
@@ -14,20 +15,28 @@ export function MesaUno({ cartaTopo, corAtual, monteCompra, onComprarCarta }: Me
     <div className="mesa-uno">
       <div className="area-monte">
         <div className="monte-descarte">
-          <CartaUno carta={cartaTopo} />
+          <motion.div
+            key={cartaTopo.id}
+            initial={{ scale: 0.8, rotate: -10 }}
+            animate={{ scale: 1, rotate: 0, opacity: 1}}
+            transition={{ type: "spring", stiffness: 200 }}
+          >
+            <CartaUno carta={cartaTopo} jogavel={false} naMesa={true} />
+          </motion.div>
           <div className="cor-atual">
             Cor atual: <span className={`cor-${corAtual}`}>{corAtual}</span>
           </div>
         </div>
         
-        <div className="monte-compra" onClick={onComprarCarta}>
-          <div className="carta-virada">
-            <div className="carta-verso">
-              <div className="logo-uno">UNO</div>
-            </div>
-          </div>
+        <motion.div 
+          className="monte-compra" 
+          onClick={onComprarCarta}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <CartaUno carta={monteCompra[0]} virada={true} jogavel={true} />
           <div className="texto-comprar">Comprar ({monteCompra.length})</div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

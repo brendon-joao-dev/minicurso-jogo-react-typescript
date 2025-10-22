@@ -1,42 +1,104 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* VARIÁVEIS CSS: maneira de reutilizar css */
+:root {
+  --vermelho: #e74c3c;    
+  --azul: #3498db;        
+  --verde: #2ecc71;       
+  --amarelo: #f1c40f;     
+  --preto: #2c3e50;       
+  --branco: #ecf0f1;     
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* CONFIGURAÇÃO PADRÃO PARA TODOS OS ELEMENTOS DA PÁGINA */
+* {
+  margin: 0 auto;         /* Centraliza elementos horizontalmente */
+  padding: 0;             /* Remove espaçamentos internos padrão */
+  box-sizing: border-box; /* Faz padding e border ficarem dentro do width/height */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ESTILOS DO CORPO DA PÁGINA */
+body {
+  /* Fundo com gradiente que vai do azul ao roxo */
+  background: linear-gradient(135deg, var(--azul) 0%, #764ba2 100%);
+  min-height: 100vh;      /* Ocupa pelo menos toda a altura da tela */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;           /* Cor do texto padrão */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* CONTAINER PRINCIPAL DO APLICATIVO */
+.app-uno {
+  max-width: 1200px;      /* Largura máxima do conteúdo */
+  margin: 0 auto;         /* Centraliza o container na página */
+  padding: 20px;          /* Espaçamento interno */
+  text-align: center;     /* Alinha todo o texto ao centro */
 }
 
-.card {
-  padding: 2em;
+/* TÍTULO PRINCIPAL */
+.app-uno h1 {
+  margin-bottom: 30px;    /* Espaço abaixo do título */
+  font-size: 2.5em;       /* Tamanho grande da fonte */
 }
 
-.read-the-docs {
-  color: #888;
+/* ESTILO BÁSICO PARA TODAS AS CARTAS */
+.carta {
+  width: 80px;           /* Largura fixa da carta */
+  height: 120px;         /* Altura fixa da carta */
+  border-radius: 8px;    /* Cantos arredondados */
+  
+  /* FLEXBOX: Sistema para organizar elementos internos */
+  display: flex;          /* Ativa o flexbox */
+  flex-direction: column; /* Organiza os elementos em coluna (um embaixo do outro) */
+  justify-content: space-between; /* Distribui espaço igual entre os elementos */
+  
+  padding: 8px;          /* Espaçamento interno */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra suave ao redor */
+  position: relative;    /* Permite posicionar elementos filhos absolutamente */
+  overflow: hidden;      /* Esconde conteúdo que sair da carta */
+}
+
+/* CLASSES DE CORES PARA CARTAS - usam as variáveis definidas no :root */
+.carta-vermelho { background: var(--vermelho); color: white; }
+.carta-azul { background: var(--azul); color: white; }
+.carta-verde { background: var(--verde); color: white; }
+.carta-amarelo { background: var(--amarelo); color: #2c3e50; }
+
+/* TOPO E BASE DA CARTA */
+.carta-topo, .carta-base {
+  display: flex;                 /* Ativa flexbox para estes elementos */
+  justify-content: flex-start;   /* Alinha conteúdo ao início (esquerda) */
+  font-weight: bold;            /* Texto em negrito */
+  font-size: 0.9em;             /* Tamanho menor da fonte */
+}
+
+.carta-base {
+  justify-content: flex-end;    /* Alinha conteúdo ao final (direita) */
+}
+
+/* CENTRO DA CARTA (onde fica o número principal) */
+.carta-centro {
+  display: flex;                /* Ativa flexbox */
+  justify-content: center;      /* Centraliza horizontalmente */
+  align-items: center;          /* Centraliza verticalmente */
+  flex: 1;                     /* Ocupa todo espaço disponível restante */
+  font-size: 2em;              /* Tamanho grande da fonte */
+  font-weight: bold;           /* Texto em negrito */
+}
+
+/* ÁREA ONDE AS CARTAS SERÃO TESTADAS/DISPLAYED */
+.area-teste {
+  display: flex;               /* Ativa flexbox para organizar as cartas */
+  justify-content: center;     /* Centraliza as cartas horizontalmente */
+  gap: 20px;                   /* Espaço entre as cartas */
+  flex-wrap: wrap;             /* Permite que cartas quebrem para linha seguinte */
+}
+
+/* EFEITO VISUAL SOBRE AS CARTAS (camada transparente) */
+.carta::before {
+  content: '';                /* Cria um elemento vazio */
+  position: absolute;         /* Posiciona absolutamente dentro da carta */
+  top: 0;                     /* Começa do topo */
+  left: 0;                    /* Começa da esquerda */
+  right: 0;                   /* Vai até a direita */
+  bottom: 0;                  /* Vai até o fundo */
+  background: rgba(255,255,255,0.1); /* Cor branca com 10% de transparência */
+  border-radius: 6px;         /* Cantos arredondados */
 }
